@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 DetectionSystem Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        
+        #status {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        #log {
+            font-family: monospace;
+            white-space: pre;
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔍 DetectionSystem Test</h1>
+    <div id="status">Loading detection.js...</div>
+    <div id="log"></div>
+
+    <script>
+        function log(message) {
+            console.log(message);
+            document.getElementById('log').textContent += message + '\n';
+        }
+
+        function updateStatus(message) {
+            document.getElementById('status').textContent = message;
+            log(message);
+        }
+
+        function testDetectionSystem() {
+            updateStatus('Testing DetectionSystem...');
+
+            try {
+                // Check if DetectionSystem exists
+                if (typeof window.DetectionSystem === 'undefined') {
+                    throw new Error('DetectionSystem is not defined on window object');
+                }
+
+                // Try to create an instance
+                const detector = new window.DetectionSystem();
+                updateStatus('✅ Successfully created DetectionSystem instance');
+
+                // Log the prototype methods
+                const methods = Object.getOwnPropertyNames(Object.getPrototypeOf(detector));
+                updateStatus('Available methods: ' + methods.join(', '));
+
+                return true;
+            } catch (error) {
+                updateStatus('❌ Error: ' + error.message);
+                log('Stack: ' + error.stack);
+                return false;
+            }
+        }
+
+        // Load detection.js
+        function loadDetectionSystem() {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = 'js/detection.js';
+                script.onload = () => {
+                    updateStatus('✅ detection.js loaded successfully');
+                    // Give it a moment to execute
+                    setTimeout(() => resolve(), 100);
+                };
+                script.onerror = () => {
+                    reject(new Error('Failed to load detection.js'));
+                };
+                document.head.appendChild(script);
+            });
+        }
+
+        // Run the test
+        async function runTest() {
+            try {
+                updateStatus('Starting DetectionSystem test...');
+                await loadDetectionSystem();
+                testDetectionSystem();
+            } catch (error) {
+                updateStatus('❌ Test failed: ' + error.message);
+                console.error(error);
+            }
+        }
+
+        // Start the test when the page loads
+        window.addEventListener('load', runTest);
+    </script>
+</body>
+
+</html>

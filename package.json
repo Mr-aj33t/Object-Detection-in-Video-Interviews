@@ -1,0 +1,40 @@
+{
+    "name": "video-proctoring-system",
+    "version": "1.0.0",
+    "description": "AI-powered video proctoring system for online interviews with focus and object detection",
+    "main": "backend/server.js",
+    "scripts": {
+        "start": "node backend/server.js",
+        "dev": "nodemon backend/server.js",
+        "frontend": "cd frontend && python -m http.server 3000",
+        "install-all": "npm install && cd backend && npm install"
+    },
+    "keywords": [
+        "video-proctoring",
+        "computer-vision",
+        "interview-monitoring",
+        "ai",
+        "tensorflow",
+        "opencv"
+    ],
+    "author": "TuteDude Assignment",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.18.2",
+        "mongoose": "^7.5.0",
+        "cors": "^2.8.5",
+        "multer": "^1.4.5-lts.1",
+        "socket.io": "^4.7.2",
+        "dotenv": "^16.3.1",
+        "bcryptjs": "^2.4.3",
+        "jsonwebtoken": "^9.0.2",
+        "helmet": "^7.0.0",
+        "express-rate-limit": "^6.10.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}

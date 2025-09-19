@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interviewer Dashboard - Video Proctoring System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Additional styles for dashboard */
+        
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+        
+        .sidebar {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-nav li {
+            margin: 0;
+        }
+        
+        .sidebar-nav a {
+            display: block;
+            padding: 1rem 2rem;
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: #34495e;
+        }
+        
+        .main-dashboard {
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .stat-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card .label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .section-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+        }
+        
+        .section-content {
+            padding: 1.5rem;
+        }
+        
+        .interview-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: box-shadow 0.3s;
+        }
+        
+        .interview-card:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .interview-card.high-risk {
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .interview-card.medium-risk {
+            border-left: 4px solid #f39c12;
+        }
+        
+        .interview-card.low-risk {
+            border-left: 4px solid #27ae60;
+        }
+        
+        .violation-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .violation-item.high {
+            background: #fdf2f2;
+            border-left: 3px solid #e74c3c;
+        }
+        
+        .violation-item.medium {
+            background: #fefbf3;
+            border-left: 3px solid #f39c12;
+        }
+        
+        .violation-item.low {
+            background: #f0f9f4;
+            border-left: 3px solid #27ae60;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table th,
+        .table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .badge.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .badge.warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .badge.danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo" style="padding: 0 2rem; margin-bottom: 2rem;">
+                <h2><i class="fas fa-shield-alt"></i> Proctoring</h2>
+            </div>
+
+            <nav>
+                <ul class="sidebar-nav">
+                    <li>
+                        <a href="#overview" class="nav-link active" data-section="overview">
+                            <i class="fas fa-tachometer-alt"></i> Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#active-interviews" class="nav-link" data-section="active-interviews">
+                            <i class="fas fa-video"></i> Active Interviews
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#violations" class="nav-link" data-section="violations">
+                            <i class="fas fa-exclamation-triangle"></i> Recent Violations
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#reports" class="nav-link" data-section="reports">
+                            <i class="fas fa-chart-bar"></i> Reports
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#analytics" class="nav-link" data-section="analytics">
+                            <i class="fas fa-analytics"></i> Analytics
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#settings" class="nav-link" data-section="settings">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-dashboard">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div>
+                    <h1>Interviewer Dashboard</h1>
+                    <p>Real-time monitoring and interview management</p>
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="refresh-data">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Overview Section -->
+            <div id="overview-section" class="dashboard-section">
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="icon" style="color: #3498db;">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="value" id="active-count">0</div>
+                        <div class="label">Active Interviews</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="icon" style="color: #e74c3c;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="value" id="violations-count">0</div>
+                        <div class="label">Today's Violations</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="icon" style="color: #f39c12;">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="value" id="avg-integrity">0%</div>
+                        <div class="label">Avg Integrity Score</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="icon" style="color: #27ae60;">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="value" id="completed-count">0</div>
+                        <div class="label">Completed Today</div>
+                    </div>
+                </div>
+
+                <!-- Active Interviews -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3>Active Interviews</h3>
+                        <span class="badge success" id="active-badge">0 Active</span>
+                    </div>
+                    <div class="section-content" id="active-interviews-list">
+                        <p class="text-center">No active interviews</p>
+                    </div>
+                </div>
+
+                <!-- Recent Violations -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3>Recent Violations</h3>
+                        <button class="btn btn-sm btn-secondary" id="view-all-violations">View All</button>
+                    </div>
+                    <div class="section-content" id="recent-violations-list">
+                        <p class="text-center">No recent violations</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Interviews Section -->
+            <div id="active-interviews-section" class="dashboard-section hidden">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3>Currently Active Interviews</h3>
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-secondary" id="auto-refresh-toggle">
+                                <i class="fas fa-sync-alt"></i> Auto Refresh: ON
+                            </button>
+                        </div>
+                    </div>
+                    <div class="section-content" id="detailed-active-interviews">
+                        <!-- Active interviews will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Violations Section -->
+            <div id="violations-section" class="dashboard-section hidden">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3>Violation Management</h3>
+                        <div class="btn-group">
+                            <select id="violation-filter" class="form-control">
+                                <option value="">All Severities</option>
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </select>
+                            <select id="time-filter" class="form-control">
+                                <option value="24">Last 24 Hours</option>
+                                <option value="168">Last Week</option>
+                                <option value="720">Last Month</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="section-content" id="violations-table-container">
+                        <!-- Violations table will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="reports-section" class="dashboard-section hidden">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3>Interview Reports</h3>
+                        <button class="btn btn-primary" id="generate-report">
+                            <i class="fas fa-file-pdf"></i> Generate Report
+                        </button>
+                    </div>
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Recent Interviews</h4>
+                                <div id="recent-interviews-list">
+                                    <!-- Recent interviews will be populated here -->
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>High-Risk Interviews</h4>
+                                <div id="high-risk-interviews-list">
+                                    <!-- High-risk interviews will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <div id="analytics-section" class="dashboard-section hidden">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3>Analytics & Insights</h3>
+                        <div class="btn-group">
+                            <select id="analytics-period" class="form-control">
+                                <option value="7">Last 7 Days</option>
+                                <option value="30">Last 30 Days</option>
+                                <option value="90">Last 90 Days</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="section-content">
+                        <div id="analytics-charts">
+                            <!-- Analytics charts will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings-section" class="dashboard-section hidden">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3>System Settings</h3>
+                    </div>
+                    <div class="section-content">
+                        <div class="settings-form">
+                            <h4>Detection Thresholds</h4>
+                            <div class="form-group">
+                                <label>Focus Lost Threshold (seconds):</label>
+                                <input type="number" id="focus-threshold" value="5" min="1" max="30">
+                            </div>
+                            <div class="form-group">
+                                <label>No Face Threshold (seconds):</label>
+                                <input type="number" id="no-face-threshold" value="10" min="5" max="60">
+                            </div>
+                            <div class="form-group">
+                                <label>Eye Closure Threshold (seconds):</label>
+                                <input type="number" id="eye-threshold" value="3" min="1" max="10">
+                            </div>
+                            <button class="btn btn-primary" id="save-settings">Save Settings</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Interview Details Modal -->
+    <div id="interview-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Interview Details</h3>
+                <button class="close-btn" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Interview details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/interviewer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Simple DetectionSystem Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        
+        #output {
+            font-family: monospace;
+            white-space: pre;
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .success {
+            color: green;
+        }
+        
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔍 Simple DetectionSystem Test</h1>
+    <div id="output">Loading test...</div>
+
+    <script>
+        const output = document.getElementById('output');
+
+        function log(message, className = '') {
+            console.log(message);
+            const line = document.createElement('div');
+            if (className) line.className = className;
+            line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            output.appendChild(line);
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                log(`Loading ${src}...`);
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = () => {
+                    log(`✅ ${src} loaded successfully`);
+                    resolve();
+                };
+                script.onerror = (error) => {
+                    log(`❌ Failed to load ${src}`, 'error');
+                    reject(error);
+                };
+                document.head.appendChild(script);
+            });
+        }
+
+        async function runTest() {
+            try {
+                // Load required scripts
+                await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js');
+                await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2/dist/coco-ssd.min.js');
+                await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@0.0.3/dist/face-landmarks-detection.min.js');
+                await loadScript('https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4.1633559619/face_mesh.js');
+
+                // Load detection.js
+                await loadScript('js/detection.js');
+
+                // Check if DetectionSystem is available
+                if (typeof window.DetectionSystem === 'undefined') {
+                    throw new Error('DetectionSystem is not defined on window object');
+                }
+
+                log('✅ DetectionSystem is available on window.DetectionSystem', 'success');
+
+                // Try to create an instance
+                log('Creating DetectionSystem instance...');
+                const detector = new window.DetectionSystem();
+                log('✅ Successfully created DetectionSystem instance', 'success');
+
+                // Show available methods
+                const methods = Object.getOwnPropertyNames(Object.getPrototypeOf(detector))
+                    .filter(m => m !== 'constructor' && typeof detector[m] === 'function');
+                log(`\nAvailable methods: ${methods.join(', ')}`);
+
+            } catch (error) {
+                log(`❌ Test failed: ${error.message}`, 'error');
+                console.error('Test error:', error);
+
+                // Log all window properties that might be related
+                const allProps = Object.getOwnPropertyNames(window);
+                const relevantProps = allProps.filter(p =>
+                    p.toLowerCase().includes('detect') ||
+                    p.toLowerCase().includes('face') ||
+                    p.toLowerCase().includes('ai')
+                );
+
+                if (relevantProps.length > 0) {
+                    log('\nFound these potentially related properties on window:', 'error');
+                    relevantProps.forEach(prop => {
+                        log(`- ${prop} (${typeof window[prop]})`);
+                    });
+                }
+            }
+        }
+
+        // Start the test when the page loads
+        window.addEventListener('DOMContentLoaded', runTest);
+    </script>
+</body>
+
+</html>

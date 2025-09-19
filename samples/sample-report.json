@@ -1,0 +1,188 @@
+{
+    "sessionInfo": {
+        "sessionId": "interview_1726611030123_abc123def",
+        "candidateName": "John Smith",
+        "candidateEmail": "john.smith@email.com",
+        "position": "Senior Software Developer",
+        "department": "Engineering",
+        "interviewType": "technical",
+        "startTime": "2024-09-18T10:30:00.000Z",
+        "endTime": "2024-09-18T11:45:00.000Z",
+        "duration": 4500,
+        "formattedDuration": "01:15:00",
+        "status": "completed"
+    },
+    "scores": {
+        "integrityScore": 85,
+        "focusScore": 90,
+        "behaviorScore": 88,
+        "overallScore": 88
+    },
+    "analysis": {
+        "recommendation": "proceed",
+        "riskLevel": "low",
+        "summary": "Interview completed in 75 minutes with integrity score of 85%. 3 violations detected. 1 high-severity violations require attention.",
+        "keyFindings": [
+            "Candidate maintained good focus throughout most of the interview",
+            "Minor violations detected during technical problem-solving phase",
+            "One instance of unauthorized object (mobile phone) briefly visible",
+            "Overall behavior consistent with honest interview conduct"
+        ]
+    },
+    "statistics": {
+        "totalViolations": 3,
+        "violationsByType": {
+            "focus_lost": 2,
+            "unauthorized_object": 1
+        },
+        "totalEvents": 12,
+        "eventsByType": {
+            "interview_started": 1,
+            "interview_ended": 1,
+            "violation": 3,
+            "focus_change": 7
+        },
+        "highSeverityViolations": 1
+    },
+    "flags": {
+        "hasViolations": true,
+        "requiresReview": false,
+        "isHighRisk": false,
+        "technicalIssues": false
+    },
+    "violations": [{
+            "type": "focus_lost",
+            "message": "Candidate looking away from camera",
+            "severity": "medium",
+            "timestamp": "2024-09-18T10:45:30.000Z",
+            "confidence": 0.85
+        },
+        {
+            "type": "unauthorized_object",
+            "message": "Mobile phone detected in frame",
+            "severity": "high",
+            "timestamp": "2024-09-18T11:12:15.000Z",
+            "confidence": 0.92
+        },
+        {
+            "type": "focus_lost",
+            "message": "Candidate looking away from camera",
+            "severity": "medium",
+            "timestamp": "2024-09-18T11:28:45.000Z",
+            "confidence": 0.78
+        }
+    ],
+    "timeline": [{
+            "type": "interview_started",
+            "message": "Interview session started",
+            "severity": "info",
+            "timestamp": "2024-09-18T10:30:00.000Z"
+        },
+        {
+            "type": "system_check",
+            "message": "System check completed successfully",
+            "severity": "info",
+            "timestamp": "2024-09-18T10:30:15.000Z"
+        },
+        {
+            "type": "focus_change",
+            "message": "Focus state changed to focused",
+            "severity": "info",
+            "timestamp": "2024-09-18T10:32:00.000Z"
+        },
+        {
+            "type": "violation",
+            "message": "Candidate looking away from camera",
+            "severity": "warning",
+            "timestamp": "2024-09-18T10:45:30.000Z"
+        },
+        {
+            "type": "focus_change",
+            "message": "Focus state changed to unfocused",
+            "severity": "warning",
+            "timestamp": "2024-09-18T10:45:30.000Z"
+        },
+        {
+            "type": "focus_change",
+            "message": "Focus state changed to focused",
+            "severity": "info",
+            "timestamp": "2024-09-18T10:46:15.000Z"
+        },
+        {
+            "type": "violation",
+            "message": "Mobile phone detected in frame",
+            "severity": "danger",
+            "timestamp": "2024-09-18T11:12:15.000Z"
+        },
+        {
+            "type": "focus_change",
+            "message": "Focus state changed to unfocused",
+            "severity": "warning",
+            "timestamp": "2024-09-18T11:28:45.000Z"
+        },
+        {
+            "type": "violation",
+            "message": "Candidate looking away from camera",
+            "severity": "warning",
+            "timestamp": "2024-09-18T11:28:45.000Z"
+        },
+        {
+            "type": "focus_change",
+            "message": "Focus state changed to focused",
+            "severity": "info",
+            "timestamp": "2024-09-18T11:29:30.000Z"
+        },
+        {
+            "type": "focus_change",
+            "message": "Focus state maintained",
+            "severity": "info",
+            "timestamp": "2024-09-18T11:35:00.000Z"
+        },
+        {
+            "type": "interview_ended",
+            "message": "Interview session ended",
+            "severity": "info",
+            "timestamp": "2024-09-18T11:45:00.000Z"
+        }
+    ],
+    "detectionAccuracy": {
+        "faceDetectionRate": 98.5,
+        "objectDetectionRate": 94.2,
+        "averageConfidence": 0.87,
+        "falsePositiveRate": 2.1
+    },
+    "environmentalFactors": {
+        "lightingConditions": "good",
+        "backgroundNoise": "minimal",
+        "videoQuality": "high",
+        "connectionStability": "stable"
+    },
+    "complianceMetrics": {
+        "guidelinesFollowed": 85,
+        "attentionScore": 90,
+        "professionalismScore": 95,
+        "technicalSetupScore": 98
+    },
+    "recommendations": [
+        "Candidate demonstrated good overall integrity during the interview",
+        "Minor focus issues may be attributed to technical problem-solving concentration",
+        "Recommend proceeding with next interview stage",
+        "Consider providing clearer guidelines about keeping personal devices out of frame"
+    ],
+    "interviewer": {
+        "name": "Sarah Johnson",
+        "email": "sarah.johnson@company.com",
+        "reviewNotes": "Candidate showed strong technical skills. Minor proctoring violations do not raise significant concerns about integrity."
+    },
+    "generatedAt": "2024-09-18T11:50:00.000Z",
+    "reportVersion": "1.0",
+    "systemInfo": {
+        "detectionModels": {
+            "objectDetection": "COCO-SSD v2.2.2",
+            "faceDetection": "MediaPipe Face Mesh v0.4",
+            "focusTracking": "Custom Algorithm v1.0"
+        },
+        "processingTime": "2.3 seconds",
+        "dataRetentionPolicy": "90 days"
+    }
+}
