@@ -258,18 +258,6 @@ DETECTION_CONFIDENCE_THRESHOLD=0.6
 MODEL_LOADING_TIMEOUT=15000
 ```
 
-## 🎯 Evaluation Criteria Compliance
-
-| Criteria | AI Implementation | Score |
-|----------|-------------------|-------|
-| **Functionality (35%)** | ✅ All features + AI enhancement | 35/35 |
-| **Code Quality (20%)** | ✅ Clean, documented, modular AI code | 20/20 |
-| **UI/UX (15%)** | ✅ AI status indicators, real-time alerts | 15/15 |
-| **Accuracy (20%)** | ✅ AI models eliminate false positives | 20/20 |
-| **Bonus Features (10%)** | ✅ Advanced AI, gaze tracking, analytics | 10/10 |
-
-**Total Score: 100/100** 🏆
-
 ## 🤝 Contributing
 
 ### AI Development Guidelines:
@@ -292,6 +280,5 @@ For AI-related support:
 - **Fallback Mode**: Verify basic detection functionality
 
 **Contact:**
-- Email: ai-support@videoproctoring.com
+- Email: ajeet11011@gmail.com
 - Documentation: [AI Integration Guide](docs/AI-INTEGRATION.md)
-- Issues: GitHub Issues for bug reports
