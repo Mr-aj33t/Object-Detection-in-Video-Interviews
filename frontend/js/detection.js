@@ -5,7 +5,7 @@
 
 // Immediately check and prevent duplicate loading
 if (window.DetectionSystem) {
-    console.log('ℹ️ DetectionSystem already loaded, skipping redefinition');
+    console.log(' DetectionSystem already loaded, skipping redefinition');
 } else {
     // Main AIDetectionSystem class
     class AIDetectionSystem {
@@ -237,38 +237,38 @@ if (window.DetectionSystem) {
 
         async initialize() {
             try {
-                console.log('🚀 Initializing AI models...');
+                console.log(' Initializing AI models...');
                 await this.loadTensorFlowModels();
                 await this.loadMediaPipeModels();
                 this.isInitialized = true;
                 return true;
             } catch (error) {
-                console.error('❌ Failed to initialize AI models:', error);
+                console.error(' Failed to initialize AI models:', error);
                 this.initializeBasicFallback();
                 return false;
             }
         }
 
         async loadTensorFlowModels() {
-            console.log('📦 Loading TensorFlow.js models...');
+            console.log(' Loading TensorFlow.js models...');
 
             if (typeof cocoSsd !== 'undefined') {
                 this.cocoSsdModel = await cocoSsd.load({
                     base: 'mobilenet_v2'
                 });
-                console.log('✅ COCO-SSD model loaded');
+                console.log(' COCO-SSD model loaded');
             }
 
             if (typeof faceLandmarksDetection !== 'undefined') {
                 this.faceDetectionModel = await faceLandmarksDetection.load(
                     faceLandmarksDetection.SupportedPackages.mediapipeFacemesh, { maxFaces: 5 }
                 );
-                console.log('✅ Face detection model loaded');
+                console.log(' Face detection model loaded');
             }
         }
 
         async loadMediaPipeModels() {
-            console.log('📦 Loading MediaPipe Face Mesh...');
+            console.log(' Loading MediaPipe Face Mesh...');
 
             if (typeof FaceMesh !== 'undefined') {
                 this.faceMesh = new FaceMesh({
@@ -284,7 +284,7 @@ if (window.DetectionSystem) {
                     minTrackingConfidence: 0.5
                 });
 
-                console.log('✅ MediaPipe Face Mesh loaded');
+                console.log(' MediaPipe Face Mesh loaded');
             }
 
             if (typeof Hands !== 'undefined') {
@@ -300,24 +300,24 @@ if (window.DetectionSystem) {
                     minTrackingConfidence: 0.5
                 });
 
-                console.log('✅ MediaPipe Hands loaded');
+                console.log(' MediaPipe Hands loaded');
             }
         }
 
         initializeBasicFallback() {
-            console.log('🔧 Initializing basic detection fallback...');
+            console.log(' Initializing basic detection fallback...');
             this.isInitialized = true;
             this.useBasicDetection = true;
         }
 
         startDetection(videoElement) {
             if (!videoElement) {
-                console.error('❌ No video element provided');
+                console.error(' No video element provided');
                 return false;
             }
             this.videoElement = videoElement;
             this.isDetecting = true;
-            console.log('🎯 Starting detection...');
+            console.log(' Starting detection...');
 
             if (this.useBasicDetection) {
                 this.startBasicDetectionLoop();
@@ -329,27 +329,27 @@ if (window.DetectionSystem) {
         }
 
         stopDetection() {
-            console.log('🛑 Stopping AI detection system...');
+            console.log(' Stopping AI detection system...');
 
             this.isDetecting = false;
 
             if (this.detectionInterval) {
                 clearInterval(this.detectionInterval);
                 this.detectionInterval = null;
-                console.log('✅ AI detection interval cleared');
+                console.log(' AI detection interval cleared');
             }
 
             if (this.focusCheckInterval) {
                 clearInterval(this.focusCheckInterval);
                 this.focusCheckInterval = null;
-                console.log('✅ Focus check interval cleared');
+                console.log(' Focus check interval cleared');
             }
 
             // Reset detection state
             this.frameSkipCount = 0;
             this.focusLostCount = 0;
 
-            console.log('🛑 Detection system completely stopped');
+            console.log(' Detection system completely stopped');
             return true;
         }
 
@@ -380,7 +380,7 @@ if (window.DetectionSystem) {
         }
 
         async startAIDetectionLoop() {
-            console.log('🤖 Starting AI detection loop...');
+            console.log(' Starting AI detection loop...');
 
             this.detectionInterval = setInterval(async() => {
                 if (!this.isDetecting || !this.videoElement) return;
@@ -423,12 +423,12 @@ if (window.DetectionSystem) {
 
                 // Log all detected objects for debugging
                 if (predictions.length > 0) {
-                    console.log(`🔍 COCO-SSD detected ${predictions.length} objects:`);
+                    console.log(` COCO-SSD detected ${predictions.length} objects:`);
                     predictions.forEach((pred, index) => {
                         console.log(`  ${index + 1}. ${pred.class} (${(pred.score * 100).toFixed(1)}% confidence)`);
                     });
                 } else {
-                    console.log('🔍 COCO-SSD: No objects detected in current frame');
+                    console.log(' COCO-SSD: No objects detected in current frame');
                 }
 
                 // STEP 1: Check for direct mobile phone detections with multiple confidence levels
