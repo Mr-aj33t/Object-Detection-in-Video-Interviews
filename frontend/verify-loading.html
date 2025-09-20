@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔍 Script Loading Verifier</title>
+    <title> Script Loading Verifier</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,7 +47,7 @@
 </head>
 
 <body>
-    <h1>🔍 Script Loading Verifier</h1>
+    <h1> Script Loading Verifier</h1>
     <p>This page verifies that all required scripts load correctly.</p>
 
     <div id="status">
@@ -81,11 +81,11 @@
         // Check if TensorFlow.js loaded
         function checkTensorFlow() {
             if (typeof tf !== 'undefined') {
-                updateStatus('tfjs-status', `✅ TensorFlow.js v${tf.version.tfjs} loaded`, 'success');
+                updateStatus('tfjs-status', ` TensorFlow.js v${tf.version.tfjs} loaded`, 'success');
                 log('TensorFlow.js loaded successfully');
                 return true;
             } else {
-                updateStatus('tfjs-status', '❌ TensorFlow.js failed to load', 'error');
+                updateStatus('tfjs-status', ' TensorFlow.js failed to load', 'error');
                 log('Error: TensorFlow.js not loaded', 'error');
                 return false;
             }
@@ -94,11 +94,11 @@
         // Check if COCO-SSD loaded
         function checkCocoSSD() {
             if (typeof cocoSsd !== 'undefined') {
-                updateStatus('coco-status', '✅ COCO-SSD loaded', 'success');
+                updateStatus('coco-status', ' COCO-SSD loaded', 'success');
                 log('COCO-SSD loaded successfully');
                 return true;
             } else {
-                updateStatus('coco-status', '❌ COCO-SSD failed to load', 'error');
+                updateStatus('coco-status', ' COCO-SSD failed to load', 'error');
                 log('Error: COCO-SSD not loaded', 'error');
                 return false;
             }
@@ -107,11 +107,11 @@
         // Check if MediaPipe loaded
         function checkMediaPipe() {
             if (typeof FaceMesh !== 'undefined') {
-                updateStatus('mediapipe-status', '✅ MediaPipe Face Mesh loaded', 'success');
+                updateStatus('mediapipe-status', ' MediaPipe Face Mesh loaded', 'success');
                 log('MediaPipe Face Mesh loaded successfully');
                 return true;
             } else {
-                updateStatus('mediapipe-status', '❌ MediaPipe Face Mesh failed to load', 'error');
+                updateStatus('mediapipe-status', ' MediaPipe Face Mesh failed to load', 'error');
                 log('Error: MediaPipe Face Mesh not loaded', 'error');
                 return false;
             }
@@ -120,11 +120,11 @@
         // Check if DetectionSystem is available
         function checkDetectionSystem() {
             if (typeof window.DetectionSystem !== 'undefined') {
-                updateStatus('detection-status', '✅ DetectionSystem loaded', 'success');
+                updateStatus('detection-status', ' DetectionSystem loaded', 'success');
                 log('DetectionSystem loaded successfully');
                 return true;
             } else {
-                updateStatus('detection-status', '❌ DetectionSystem not found', 'error');
+                updateStatus('detection-status', ' DetectionSystem not found', 'error');
                 log('Error: DetectionSystem not defined', 'error');
                 log('Check if detection.js is in the correct location and has no syntax errors', 'error');
                 return false;
@@ -164,10 +164,10 @@
                             const detectionLoaded = checkDetectionSystem();
 
                             if (detectionLoaded) {
-                                log('\n🎉 All systems go! You can now use the DetectionSystem in your code.');
+                                log('\n All systems go! You can now use the DetectionSystem in your code.');
                                 log('Example: const detector = new window.DetectionSystem();');
                             } else {
-                                log('\n❌ DetectionSystem not found after loading detection.js');
+                                log('\n DetectionSystem not found after loading detection.js');
                                 log('Checking window object for available properties...');
 
                                 // Log all global properties that might be related
@@ -186,8 +186,8 @@
                         }, 500);
                     },
                     (error) => {
-                        log(`❌ ${error}`, 'error');
-                        updateStatus('detection-status', '❌ Failed to load detection.js', 'error');
+                        log(` ${error}`, 'error');
+                        updateStatus('detection-status', ' Failed to load detection.js', 'error');
                         log('Please check if the file exists at: js/detection.js');
                     }
                 );
