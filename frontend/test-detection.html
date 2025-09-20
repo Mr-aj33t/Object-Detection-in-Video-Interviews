@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔍 DetectionSystem Test</title>
+    <title> DetectionSystem Test</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    <h1>🔍 DetectionSystem Test</h1>
+    <h1> DetectionSystem Test</h1>
     <div id="status">Loading detection.js...</div>
     <div id="log"></div>
 
@@ -53,7 +53,7 @@
 
                 // Try to create an instance
                 const detector = new window.DetectionSystem();
-                updateStatus('✅ Successfully created DetectionSystem instance');
+                updateStatus(' Successfully created DetectionSystem instance');
 
                 // Log the prototype methods
                 const methods = Object.getOwnPropertyNames(Object.getPrototypeOf(detector));
@@ -61,7 +61,7 @@
 
                 return true;
             } catch (error) {
-                updateStatus('❌ Error: ' + error.message);
+                updateStatus(' Error: ' + error.message);
                 log('Stack: ' + error.stack);
                 return false;
             }
@@ -73,7 +73,7 @@
                 const script = document.createElement('script');
                 script.src = 'js/detection.js';
                 script.onload = () => {
-                    updateStatus('✅ detection.js loaded successfully');
+                    updateStatus(' detection.js loaded successfully');
                     // Give it a moment to execute
                     setTimeout(() => resolve(), 100);
                 };
@@ -91,7 +91,7 @@
                 await loadDetectionSystem();
                 testDetectionSystem();
             } catch (error) {
-                updateStatus('❌ Test failed: ' + error.message);
+                updateStatus(' Test failed: ' + error.message);
                 console.error(error);
             }
         }
