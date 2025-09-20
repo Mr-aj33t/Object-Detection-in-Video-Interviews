@@ -96,7 +96,7 @@
 
                             if (directBtn) {
                                 directBtn.addEventListener('click', function() {
-                                    console.log('🎯 DIRECT INTERVIEW START!');
+                                    console.log('DIRECT INTERVIEW START!');
 
                                     try {
                                         // Initialize session data properly
@@ -122,7 +122,7 @@
                                         if (interviewPhase) interviewPhase.classList.add('active');
 
                                         console.log('✅ DIRECT INTERVIEW STARTED!');
-                                        alert('🎉 Interview started successfully!\n\n✅ Video proctoring active\n✅ Real-time monitoring enabled\n✅ All systems operational');
+                                        alert('Interview started successfully!\n\n Video proctoring active\n Real-time monitoring enabled\n All systems operational');
 
                                     } catch (error) {
                                         console.error('Error starting interview:', error);
@@ -224,7 +224,7 @@
 
                         <!-- AI System Status -->
                         <div class="system-status">
-                            <h3>🤖 AI Detection Status</h3>
+                            <h3>AI Detection Status</h3>
                             <div class="status-grid">
                                 <div class="status-item">
                                     <span class="status-label">TensorFlow.js:</span>
@@ -354,7 +354,7 @@
     <script>
         // Verify all AI libraries are loaded before proceeding
         window.addEventListener('DOMContentLoaded', () => {
-            console.log('🔍 Checking AI library availability...');
+            console.log('Checking AI library availability...');
 
             const libraries = {
                 'TensorFlow.js': !!window.tf,
@@ -363,14 +363,14 @@
                 'MediaPipe Face Mesh': !!window.FaceMesh
             };
 
-            console.log('📊 AI Libraries Status:', libraries);
+            console.log('AI Libraries Status:', libraries);
 
             const allLoaded = Object.values(libraries).every(loaded => loaded);
 
             if (allLoaded) {
-                console.log('✅ All AI libraries loaded successfully');
+                console.log('All AI libraries loaded successfully');
             } else {
-                console.error('❌ Some AI libraries failed to load:', libraries);
+                console.error('Some AI libraries failed to load:', libraries);
                 console.error('This will cause the system to fall back to basic detection');
             }
         });
