@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔍 Simple DetectionSystem Test</title>
+    <title> Simple DetectionSystem Test</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,7 +32,7 @@
 </head>
 
 <body>
-    <h1>🔍 Simple DetectionSystem Test</h1>
+    <h1> Simple DetectionSystem Test</h1>
     <div id="output">Loading test...</div>
 
     <script>
@@ -53,11 +53,11 @@
                 const script = document.createElement('script');
                 script.src = src;
                 script.onload = () => {
-                    log(`✅ ${src} loaded successfully`);
+                    log(` ${src} loaded successfully`);
                     resolve();
                 };
                 script.onerror = (error) => {
-                    log(`❌ Failed to load ${src}`, 'error');
+                    log(` Failed to load ${src}`, 'error');
                     reject(error);
                 };
                 document.head.appendChild(script);
@@ -80,12 +80,12 @@
                     throw new Error('DetectionSystem is not defined on window object');
                 }
 
-                log('✅ DetectionSystem is available on window.DetectionSystem', 'success');
+                log(' DetectionSystem is available on window.DetectionSystem', 'success');
 
                 // Try to create an instance
                 log('Creating DetectionSystem instance...');
                 const detector = new window.DetectionSystem();
-                log('✅ Successfully created DetectionSystem instance', 'success');
+                log(' Successfully created DetectionSystem instance', 'success');
 
                 // Show available methods
                 const methods = Object.getOwnPropertyNames(Object.getPrototypeOf(detector))
@@ -93,7 +93,7 @@
                 log(`\nAvailable methods: ${methods.join(', ')}`);
 
             } catch (error) {
-                log(`❌ Test failed: ${error.message}`, 'error');
+                log(` Test failed: ${error.message}`, 'error');
                 console.error('Test error:', error);
 
                 // Log all window properties that might be related
