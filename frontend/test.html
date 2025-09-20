@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🤖 AI Detection System Test</title>
+    <title> AI Detection System Test</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -149,11 +149,11 @@
 
 <body>
     <div class="test-container">
-        <h1>🤖 AI Detection System Test Page</h1>
+        <h1> AI Detection System Test Page</h1>
         <p>This page tests the AI-powered video proctoring detection system.</p>
 
         <!-- AI System Status -->
-        <h3>📊 AI System Status</h3>
+        <h3> AI System Status</h3>
         <div class="status-grid">
             <div class="status-card loading">
                 <strong>TensorFlow.js:</strong>
@@ -174,23 +174,23 @@
         </div>
 
         <!-- Test Controls -->
-        <h3>🎮 Test Controls</h3>
+        <h3> Test Controls</h3>
         <div class="test-buttons">
-            <button class="btn btn-primary" onclick="initializeSystem()">🚀 Initialize AI System</button>
-            <button class="btn btn-success" onclick="startCamera()">📹 Start Camera</button>
-            <button class="btn btn-warning" onclick="testDetection()">🧪 Test Detection</button>
-            <button class="btn btn-danger" onclick="stopSystem()">🛑 Stop System</button>
+            <button class="btn btn-primary" onclick="initializeSystem()"> Initialize AI System</button>
+            <button class="btn btn-success" onclick="startCamera()"> Start Camera</button>
+            <button class="btn btn-warning" onclick="testDetection()"> Test Detection</button>
+            <button class="btn btn-danger" onclick="stopSystem()"> Stop System</button>
         </div>
 
         <!-- Video Display -->
-        <h3>📺 Video Feed</h3>
+        <h3> Video Feed</h3>
         <div class="video-container">
             <video id="test-video" autoplay muted playsinline></video>
             <canvas id="test-canvas" width="320" height="240" style="border: 2px solid #007bff;"></canvas>
         </div>
 
         <!-- Statistics -->
-        <h3>📈 Detection Statistics</h3>
+        <h3> Detection Statistics</h3>
         <div class="stats-display">
             <div><strong>Total Detections:</strong> <span id="total-detections">0</span></div>
             <div><strong>Violations:</strong> <span id="total-violations">0</span></div>
@@ -203,10 +203,10 @@
         <div id="alerts-container"></div>
 
         <!-- Console Log -->
-        <h3>📝 System Log</h3>
+        <h3> System Log</h3>
         <div class="log-container" id="log-container">
-            <div>🚀 AI Detection System Test Page Loaded</div>
-            <div>📋 Ready to initialize AI models...</div>
+            <div> AI Detection System Test Page Loaded</div>
+            <div> Ready to initialize AI models...</div>
         </div>
     </div>
 
@@ -217,7 +217,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4.1633559619/face_mesh.js"></script>
 
     <!-- Load detection system first -->
-    <script src="js/detection.js" onerror="console.error('❌ Failed to load detection.js')"></script>
+    <script src="js/detection.js" onerror="console.error(' Failed to load detection.js')"></script>
 
     <script>
         let detectionSystem = null;
@@ -226,7 +226,7 @@
         // Check if DetectionSystem is available
         function isDetectionSystemReady() {
             if (typeof window.DetectionSystem === 'undefined') {
-                console.error('❌ DetectionSystem is not defined. Check if detection.js loaded correctly.');
+                console.error(' DetectionSystem is not defined. Check if detection.js loaded correctly.');
                 return false;
             }
             return true;
@@ -278,7 +278,7 @@
 
         async function initializeSystem() {
             try {
-                addToLog('🤖 Initializing AI Detection System...');
+                addToLog(' Initializing AI Detection System...');
                 updateStatus('system-status', 'Initializing...', 'loading');
 
                 // Check if DetectionSystem is available
@@ -299,25 +299,25 @@
                 const success = await detectionSystem.initialize();
 
                 if (success) {
-                    addToLog('✅ AI models loaded successfully');
+                    addToLog('AI models loaded successfully');
                     updateStatus('tensorflow-status', 'Ready', 'ready');
                     updateStatus('coco-status', 'Ready', 'ready');
                     updateStatus('mediapipe-status', 'Ready', 'ready');
                     updateStatus('detection-mode', 'AI Enhanced', 'ready');
                     updateStatus('system-status', 'AI Ready', 'ready');
-                    showAlert('🤖 AI Detection System initialized successfully!', 'success');
+                    showAlert(' AI Detection System initialized successfully!', 'success');
                 } else {
-                    addToLog('⚠️ Using basic detection fallback');
+                    addToLog(' Using basic detection fallback');
                     updateStatus('tensorflow-status', 'Fallback', 'warning');
                     updateStatus('coco-status', 'Fallback', 'warning');
                     updateStatus('mediapipe-status', 'Fallback', 'warning');
                     updateStatus('detection-mode', 'Basic Mode', 'warning');
                     updateStatus('system-status', 'Basic Ready', 'warning');
-                    showAlert('⚠️ Using basic detection mode', 'warning');
+                    showAlert(' Using basic detection mode', 'warning');
                 }
 
             } catch (error) {
-                const errorMsg = `❌ Initialization failed: ${error.message}`;
+                const errorMsg = ` Initialization failed: ${error.message}`;
                 addToLog(errorMsg);
                 updateStatus('system-status', 'Failed', 'error');
                 showAlert(errorMsg, 'danger');
@@ -329,7 +329,7 @@
 
         async function startCamera() {
             try {
-                addToLog('📹 Starting camera...');
+                addToLog(' Starting camera...');
 
                 videoStream = await navigator.mediaDevices.getUserMedia({
                     video: {
@@ -343,30 +343,30 @@
                 video.srcObject = videoStream;
 
                 await video.play();
-                addToLog('✅ Camera started successfully');
+                addToLog(' Camera started successfully');
 
                 if (detectionSystem) {
                     const started = detectionSystem.startDetection(video);
                     if (started) {
-                        addToLog('🎯 Detection started');
+                        addToLog(' Detection started');
                         updateStatus('system-status', 'Detecting', 'ready');
-                        showAlert('🎯 Detection started successfully!', 'success');
+                        showAlert(' Detection started successfully!', 'success');
                     }
                 }
 
             } catch (error) {
-                addToLog(`❌ Camera error: ${error.message}`);
-                showAlert(`❌ Camera error: ${error.message}`, 'danger');
+                addToLog(` Camera error: ${error.message}`);
+                showAlert(` Camera error: ${error.message}`, 'danger');
             }
         }
 
         function testDetection() {
             if (!detectionSystem) {
-                showAlert('❌ Please initialize the system first', 'danger');
+                showAlert(' Please initialize the system first', 'danger');
                 return;
             }
 
-            addToLog('🧪 Running detection test...');
+            addToLog(' Running detection test...');
 
             // Trigger test violations
             setTimeout(() => {
@@ -381,23 +381,23 @@
                 detectionSystem.triggerViolation('focus_lost', 'Test: Focus lost', 'low');
             }, 3000);
 
-            showAlert('🧪 Running detection tests...', 'warning');
+            showAlert(' Running detection tests...', 'warning');
         }
 
         function stopSystem() {
             if (detectionSystem) {
                 detectionSystem.stopDetection();
-                addToLog('🛑 Detection stopped');
+                addToLog(' Detection stopped');
             }
 
             if (videoStream) {
                 videoStream.getTracks().forEach(track => track.stop());
                 videoStream = null;
-                addToLog('📹 Camera stopped');
+                addToLog(' Camera stopped');
             }
 
             updateStatus('system-status', 'Stopped', 'error');
-            showAlert('🛑 System stopped', 'warning');
+            showAlert(' System stopped', 'warning');
         }
 
         function updateStats() {
@@ -416,12 +416,12 @@
 
         // Update the load event listener to ensure everything is ready
         window.addEventListener('load', () => {
-            console.log('🚀 AI Detection System Test Page Loaded');
-            console.log('📋 Ready to initialize AI models...');
+            console.log(' AI Detection System Test Page Loaded');
+            console.log(' Ready to initialize AI models...');
 
             // Check if detection.js loaded correctly
             if (!isDetectionSystemReady()) {
-                const errorMsg = '❌ DetectionSystem not found. Check browser console for details.';
+                const errorMsg = ' DetectionSystem not found. Check browser console for details.';
                 console.error(errorMsg);
                 showAlert(errorMsg, 'danger');
                 updateStatus('system-status', 'Error: Check Console', 'error');
@@ -430,7 +430,7 @@
 
             // Auto-initialize after a short delay
             setTimeout(() => {
-                console.log('🔄 Auto-initializing system...');
+                console.log(' Auto-initializing system...');
                 initializeSystem();
             }, 1000);
         });
